@@ -1,15 +1,11 @@
 name: 'AAP on Azure'
 on:
-  #push:
-  #  branches:
-  #    - 'dev'
   workflow_dispatch:
 
 jobs:
   Ansible:
     name: 'Ansible'
     runs-on: ubuntu-latest
-    #environment: dev
     permissions:
       contents: read
       pull-requests: write
@@ -23,7 +19,8 @@ jobs:
 
       - name: Run ansible playbook
         run: |
-          ansible-galaxy collection install -r collections/requirements.yml
+          #ansible-galaxy collection install -r collections/requirements.yml
+          ansible-galaxy collection install git+https://github.com/ansible-content-lab/azure_ansible_deployment.git
           export ANSIBLE_HOST_KEY_CHECKING=False
           ansible-playbook lab.azure_deploy.deploy_infrastructure \
             -e "ansible_python_interpreter=`which python3`" \
