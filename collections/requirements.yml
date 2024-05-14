@@ -1,5 +1,4 @@
 collections:
   - name: https://github.com/ansible-content-lab/azure_ansible_deployment.git
     type: git
-  - name: https://github.com/ansible-collections/azure.git
-    type: git
+
