@@ -20,7 +20,6 @@ jobs:
       - name: Run ansible playbook
         run: |
           ansible-galaxy collection install -r collections/requirements.yml
-          #ansible-galaxy collection install git+https://github.com/ansible-content-lab/azure_ansible_deployment.git
           export ANSIBLE_HOST_KEY_CHECKING=False
           ansible-playbook lab.azure_deployment.deploy_infrastructure \
             -e "ansible_python_interpreter=`which python3`" \
@@ -30,6 +29,6 @@ jobs:
             -e "AZURE_CLIENT_SECRET=${{ secrets.AZURE_CLIENT_SECRET }}"
             -e "AZURE_SUBSCRIPTION_ID=${{ secrets.AZURE_SUBSCRIPTION_ID }}" \
             -e "AZURE_TENANT_ID=${{ secrets.AZURE_TENANT_ID }}"
-            -e "infrastructure_database_server_user=${{ secrets.INFRA_DB_USER }}"
+            -e "infrastructure_database_server_user=dbadmin"
             -e "infrastructure_database_server_password=${{ secrets.INFRA_DB_PASSWORD }}"
             -e "aap_admin_password=${{ secrets.AAP_ADMIN_PASSWORD }}"
