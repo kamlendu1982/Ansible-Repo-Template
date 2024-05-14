@@ -1,1 +1,1 @@
-msrestazure
+azure
