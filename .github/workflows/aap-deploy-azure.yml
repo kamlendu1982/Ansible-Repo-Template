@@ -17,8 +17,6 @@ jobs:
         run: |
           if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi
           if [ -f collections/requirements.yml ]; then ansible-galaxy collection install -r collections/requirements.yml; fi
-          ansible-galaxy collection list
-          ls -al ~/.ansible/collections/ansible_collections/
           ansible-galaxy collection install azure.azcollection --force
           pip3 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements-azure.txt
           
@@ -30,9 +28,9 @@ jobs:
             -e "aap_red_hat_username=${{ secrets.AAP_RH_USERNAME }}" \
             -e "aap_red_hat_password=${{ secrets.AAP_RH_PASSWORD }}" \
             -e "AZURE_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}" \
-            -e "AZURE_CLIENT_SECRET=${{ secrets.AZURE_CLIENT_SECRET }}" \
+            -e "AZURE_SECRET=${{ secrets.AZURE_CLIENT_SECRET }}" \
             -e "AZURE_SUBSCRIPTION_ID=${{ secrets.AZURE_SUBSCRIPTION_ID }}" \
-            -e "AZURE_TENANT_ID=${{ secrets.AZURE_TENANT_ID }}" \
+            -e "AZURE_TENANT=${{ secrets.AZURE_TENANT_ID }}" \
             -e "infrastructure_database_server_user=${{ secrets.INFRA_DB_USER }}" \
             -e "infrastructure_database_server_password=${{ secrets.INFRA_DB_PASSWORD }}" \
             -e "aap_admin_password=${{ secrets.AAP_ADMIN_PASSWORD }}"
