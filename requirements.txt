@@ -1,1 +1,1 @@
-azure-common
+azure-mgmt-common
