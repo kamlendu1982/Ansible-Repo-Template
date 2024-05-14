@@ -1,0 +1,26 @@
+name: 'Destroy Azure'
+on:
+  workflow_dispatch:
+
+jobs:
+  Ansible:
+    name: 'Ansible'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v3
+
+      - name: Install Ansible Collections and Python Dependencies 
+        run: |
+          if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi
+          if [ -f collections/requirements.yml ]; then ansible-galaxy collection install -r collections/requirements.yml; fi
+          ansible-galaxy collection install azure.azcollection --force
+          pip3 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements-azure.txt
+
+      - name: Destroy Command
+        run: |
+          az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+          ansible-playbook lab.azure_deployment.destroy_infrastructure --extra-vars "aap_red_hat_username=${{ secrets.AAP_RH_USERNAME }} aap_red_hat_password=${{ secrets.AAP_RH_PASSWORD }}"
