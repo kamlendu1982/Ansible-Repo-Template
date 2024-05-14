@@ -22,7 +22,7 @@ jobs:
           ansible-galaxy collection install -r collections/requirements.yml
           #ansible-galaxy collection install git+https://github.com/ansible-content-lab/azure_ansible_deployment.git
           export ANSIBLE_HOST_KEY_CHECKING=False
-          ansible-playbook files/deploy_infrastructure \
+          ansible-playbook lab.azure_deployment.deploy_infrastructure \
             -e "ansible_python_interpreter=`which python3`" \
             -e "aap_red_hat_username=${{ secrets.AAP_RH_USERNAME }}" \
             -e "aap_red_hat_password=${{ secrets.AAP_RH_PASSWORD }}" \
