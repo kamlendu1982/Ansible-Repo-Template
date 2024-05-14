@@ -1,0 +1,42 @@
+name: 'AAP on Azure'
+on:
+  #push:
+  #  branches:
+  #    - 'dev'
+  workflow_dispatch:
+
+jobs:
+  Ansible:
+    name: 'Ansible'
+    runs-on: ubuntu-latest
+    #environment: dev
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v3
+
+      - name: Install Python Dependencies
+        run: |
+          if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi
+
+      - name: Run ansible playbook
+        run: |
+          ansible-galaxy collection install -r collections/requirements.yml
+          export ANSIBLE_HOST_KEY_CHECKING=False
+          ansible-playbook lab.azure_deploy.deploy_infrastructure \
+            -e "ansible_python_interpreter=`which python3`" \
+            -e "aap_red_hat_username=${{ secrets.AAP_RH_USERNAME }}" \
+            -e "aap_red_hat_password=${{ secrets.AAP_RH_PASSWORD }}" \
+            -e "AZURE_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}" \
+            -e "AZURE_CLIENT_SECRET=${{ secrets.AZURE_CLIENT_SECRET }}"
+            -e "AZURE_SUBSCRIPTION_ID=${{ secrets.AZURE_SUBSCRIPTION_ID }}" \
+            -e "AZURE_TENANT_ID=${{ secrets.AZURE_TENANT_ID }}"
+            -e "infrastructure_database_server_user=${{ secrets.INFRA_DB_USER }}"
+            -e "infrastructure_database_server_password=${{ secrets.INFRA_DB_PASSWORD }}"
+            -e "aap_admin_password=${{ secrets.AAP_ADMIN_PASSWORD }}"
+
+
+            "aap_red_hat_username=$RED_HAT_ACCOUNT aap_red_hat_password=$RED_HAT_PASSWORD infrastructure_database_server_user=example_user infrastructure_database_server_password=example_database_server_password
+aap_admin_password=example_aap_admin_password"
