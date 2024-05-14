@@ -1,1 +1,1 @@
-msrestazure
+ansible[azure]
