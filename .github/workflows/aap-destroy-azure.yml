@@ -20,9 +20,10 @@ jobs:
           mkdir -p /home/runner/.ssh
           echo "${{ secrets.LOCAL_SSH_KEY }}" > /home/runner/.ssh/id_rsa
           chmod 600 /home/runner/.ssh/id_rsa
+          cp local/id_rsa.pub ~/.ssh/id_rsa.pub
           ssh-agent -a $SSH_AUTH_SOCK > /dev/null	
           ssh-add /home/runner/.ssh/id_rsa
-          cp local/id_rsa.pub ~/.ssh/id_rsa.pub
+          
 
       - name: Install Ansible Collections and Python Dependencies 
         run: |
