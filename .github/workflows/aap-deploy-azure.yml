@@ -13,14 +13,16 @@ jobs:
       - name: 'Checkout'
         uses: actions/checkout@v3
 
-      - name: Install Python Dependencies
+      - name: Install Ansible Collections and Python Dependencies 
         run: |
           if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi
+          ansible-galaxy collection install -r collections/requirements.yml
+          pip3 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements.txt
+          #ansible-galaxy collection install git+https://github.com/ansible-content-lab/azure_ansible_deployment.git
+          ansible-galaxy collection install azure.azcollection --force
 
       - name: Run ansible playbook
         run: |
-          ansible-galaxy collection install -r collections/requirements.yml
-          #ansible-galaxy collection install git+https://github.com/ansible-content-lab/azure_ansible_deployment.git
           export ANSIBLE_HOST_KEY_CHECKING=False
           ansible-playbook lab.azure_deployment.deploy_infrastructure \
             -e "ansible_python_interpreter=`which python3`" \
