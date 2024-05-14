@@ -24,6 +24,7 @@ jobs:
         run: |
           az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
           export ANSIBLE_HOST_KEY_CHECKING=False
+          mkdir ~/.ssh
           cp local/id_rsa.pub ~/.ssh/id_rsa.pub
           ansible-playbook lab.azure_deployment.deploy_infrastructure \
             -e "ansible_python_interpreter=`which python3`" \
