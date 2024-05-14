@@ -18,7 +18,8 @@ jobs:
           if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi
           if [ -f collections/requirements.yml ]; then ansible-galaxy collection install -r collections/requirements.yml; fi
           pip3 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements-azure.txt
-
+          ansible-galaxy collection install azure.azcollection --force
+          
       - name: Run ansible playbook
         run: |
           export ANSIBLE_HOST_KEY_CHECKING=False
