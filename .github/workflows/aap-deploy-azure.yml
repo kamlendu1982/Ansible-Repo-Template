@@ -16,8 +16,7 @@ jobs:
       - name: Install Ansible Collections and Python Dependencies 
         run: |
           if [ -f requirements.txt ]; then pip3 install -r requirements.txt; fi
-          ansible-galaxy collection install -r collections/requirements.yml
-          ansible-galaxy collection install azure.azcollection --force
+          if [ -f collections/requirements.yml ]; then ansible-galaxy collection install -r collections/requirements.yml; fi
 
       - name: Run ansible playbook
         run: |
