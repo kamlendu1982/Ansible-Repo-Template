@@ -10,7 +10,7 @@ NOTE: *fork* or *clone* repo so that you can use your own GitHub Secrets and wor
 
 == Purpose
 
-This repo contains a GitHub Actions workflow that will use the collection link:https://github.com/ansible-content-lab/azure_ansible_deployment.git[lab.azure_deployment] to provide an automated way to deply Ansible Automation Platform infrastructure on Azure Cloud.
+This repo contains a GitHub Actions workflow that will use the collection link:https://github.com/ansible-content-lab/azure_ansible_deployment.git[lab.azure_deployment] to provide an automated way to deploy Azure infrastructure for AAP.
 
 == Workflow
 === Deploy Azure infrastructure for AAP
