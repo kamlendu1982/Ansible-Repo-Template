@@ -12,9 +12,26 @@ NOTE: *fork* or *clone* repo so that you can use your own GitHub Secrets and wor
 
 This repo contains a GitHub Actions workflow that will use the collection link:https://github.com/ansible-content-lab/azure_ansible_deployment.git[lab.azure_deployment] to provide an automated way to deply Ansible Automation Platform infrastructure on Azure Cloud.
 
-link:https://galaxy.ansible.com/ui/repo/published/azure/azcollection/docs/[azure.azcollection]
-
 == Workflow
+. Deploy Azure infrastructure for AAP
+* Review the link:https://github.com/ansible-content-lab/azure_ansible_deployment.git[lab.azure_deployment] collection
+** Ensure the Azure Credentials are configured as GitHub Secrets
+*** AZURE_CLIENT_ID
+*** AZURE_SECRET
+*** AZURE_SUBSCRIPTION_ID
+*** AZURE_TENANT
+** Ensure the AAP Credentials are configured as GitHub Secrets
+*** AAP_ADMIN_PASSWORD
+*** AAP_RH_USERNAME
+*** AAP_RH_PASSWORD
+** Ensure the Infrastructure components are set as GitHub Secrets
+*** INFRA_DB_USER
+*** INFRA_DB_PASSWORD
+*** LOCAL_SSH_KEY
+
+NOTE: Description of each of the needed GitHub Secrets can be found at link:https://github.com/ansible-content-lab/azure_ansible_deployment.git[lab.azure_deployment] 
+
+image::https://github.com/r3dact3d/Ansible-Repo-Template/actions/workflows/aap-deploy-azure.yml/badge.svg[link="https://github.com/r3dact3d/Ansible-Repo-Template/actions/workflows/aap-deploy-azure.yml"]
 
 cd /opt/ansible-automation-platform/installer/
 sudo nohup ./setup.sh -i inventory_azure 2>&1 &
