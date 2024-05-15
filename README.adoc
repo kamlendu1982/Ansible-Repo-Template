@@ -45,6 +45,10 @@ At this point you can ssh into one of the controller nodes and run the installer
 NOTE: This is when the SSH keys we defined come into play.  
 [.bash]
 ----
+ssh azureuser@*controller_ip*
+----
+[.bash]
+----
 cd /opt/ansible-automation-platform/installer/
 ----
 [.bash]
