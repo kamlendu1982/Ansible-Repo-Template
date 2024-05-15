@@ -6,8 +6,6 @@ NOTE: *fork* or *clone* repo so that you can use your own GitHub Secrets and wor
 
 * <<Purpose, Purpose>>
 * <<Workflow, Workflow>>
-* <<Prereqs, Prereqs>>
-* <<Playbook, Playbook>>
 * <<Status, Status>>
 
 == Purpose
@@ -15,3 +13,8 @@ NOTE: *fork* or *clone* repo so that you can use your own GitHub Secrets and wor
 This repo contains a GitHub Actions workflow that will use the collection link:https://github.com/ansible-content-lab/azure_ansible_deployment.git[lab.azure_deployment] to provide an automated way to deply Ansible Automation Platform infrastructure on Azure Cloud.
 
 link:https://galaxy.ansible.com/ui/repo/published/azure/azcollection/docs/[azure.azcollection]
+
+== Workflow
+
+cd /opt/ansible-automation-platform/installer/
+sudo nohup ./setup.sh -i inventory_azure 2>&1 &
