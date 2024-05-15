@@ -13,8 +13,8 @@ NOTE: *fork* or *clone* repo so that you can use your own GitHub Secrets and wor
 This repo contains a GitHub Actions workflow that will use the collection link:https://github.com/ansible-content-lab/azure_ansible_deployment.git[lab.azure_deployment] to provide an automated way to deply Ansible Automation Platform infrastructure on Azure Cloud.
 
 == Workflow
-. Deploy Azure infrastructure for AAP
-* Review the link:https://github.com/ansible-content-lab/azure_ansible_deployment.git[lab.azure_deployment] collection
+=== Deploy Azure infrastructure for AAP
+. Review the link:https://github.com/ansible-content-lab/azure_ansible_deployment.git[lab.azure_deployment] collection
 ** Ensure the Azure Credentials are configured as GitHub Secrets
 *** AZURE_CLIENT_ID
 *** AZURE_SECRET
@@ -27,11 +27,28 @@ This repo contains a GitHub Actions workflow that will use the collection link:h
 ** Ensure the Infrastructure components are set as GitHub Secrets
 *** INFRA_DB_USER
 *** INFRA_DB_PASSWORD
-*** LOCAL_SSH_KEY
+*** LOCAL_SSH_KEY - *private pem key*
 
-NOTE: Description of each of the needed GitHub Secrets can be found at link:https://github.com/ansible-content-lab/azure_ansible_deployment.git[lab.azure_deployment] 
+NOTE: Description of each of the needed GitHub Secrets can be found at link:https://github.com/ansible-content-lab/azure_ansible_deployment.git[lab.azure_deployment] There maybe other variables that can be define to customize the infrastructure deployment.
+
+[start=2]
+. Update SSH public key
+** Replace local/id_rsa.pub in this git repo with your public ssh key
+. After the secrets have been defined we can run the link:https://github.com/r3dact3d/Ansible-Repo-Template/actions/workflows/aap-deploy-azure.yml[AAP Deploy Azure] workflow to create the Azure infrastructure and prep for AAP installation
 
 image::https://github.com/r3dact3d/Ansible-Repo-Template/actions/workflows/aap-deploy-azure.yml/badge.svg[link="https://github.com/r3dact3d/Ansible-Repo-Template/actions/workflows/aap-deploy-azure.yml"]
 
+=== Install Ansible Automation Platform components
+
+At this point you can ssh into one of the controller nodes and run the installer. 
+
+NOTE: This is when the SSH keys we defined come into play.  
+[.bash]
+----
 cd /opt/ansible-automation-platform/installer/
-sudo nohup ./setup.sh -i inventory_azure 2>&1 &
+----
+[.bash]
+----
+sudo nohup ./setup.sh -i inventory_azure > /dev/null 2>&1 &
+----
+
