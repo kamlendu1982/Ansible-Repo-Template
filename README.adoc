@@ -16,8 +16,8 @@ This repo contains a GitHub Actions workflow that will use the collection link:h
 === Deploy Azure infrastructure for AAP
 . Review the link:https://github.com/ansible-content-lab/azure_ansible_deployment.git[lab.azure_deployment] collection
 ** Ensure the Azure Credentials are configured as GitHub Secrets
-*** AZURE_CLIENT_ID
-*** AZURE_SECRET
+*** AZURE_CLIENT_ID - this is Azure Service Principle ID
+*** AZURE_SECRET - this is the secret for the Service Principle
 *** AZURE_SUBSCRIPTION_ID
 *** AZURE_TENANT
 ** Ensure the AAP Credentials are configured as GitHub Secrets
